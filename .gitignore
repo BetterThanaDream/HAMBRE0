@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+.venv
+
+# Flask / entorno
+.instance
+.env
+.env.local
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Base de datos local de desarrollo (no subir con datos reales sensibles si no es el dump de ejemplo)
+*.sqlite
+*.db
