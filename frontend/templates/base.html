@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hambre Cero | Juntos por el ODS 2{% endblock %}</title>
+    
+    <!-- Fuentes de Google: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Configurado con colores corporativos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="font-sans antialiased bg-gray-50 text-gray-800">
+
+    <!-- Navegacion con efecto Cristal (Glassmorphism) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-white/80 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.location.href='{{ url_for('index') }}'">
+                    <svg class="w-8 h-8 text-brand-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Hambre<span class="text-brand-600">Cero</span></span>
+                </div>
+                <!-- Links (Desktop) -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Inicio</a>
+                    {% if session.get('user_id') %}
+                    <a href="{{ url_for('panel') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Panel</a>
+                    {% if session.get('rol') == 'admin' %}
+                    <a href="{{ url_for('gestion') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Gestion</a>
+                    {% endif %}
+                    <a href="{{ url_for('reportes') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Reportes</a>
+                    {% endif %}
+                    {% if not session.get('user_id') %}
+                    <a href="#iniciativas" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Iniciativas</a>
+                    <a href="#nosotros" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Nosotros</a>
+                    {% endif %}
+                    {% if session.get('user_id') %}
+                    <a href="{{ url_for('salir') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Salir</a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Iniciar sesion</a>
+                    {% endif %}
+                    {% if not session.get('user_id') %}
+                    <button onclick="window.location.href='{{ url_for('registro') }}'" class="bg-brand-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-500 hover:-translate-y-0.5 transition-all duration-200">
+                        Donar Ahora
+                    </button>
+                    {% else %}
+                    <button onclick="window.location.href='{{ url_for('donacion') }}'" class="bg-brand-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-500 hover:-translate-y-0.5 transition-all duration-200">
+                        Donar Ahora
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mensajes de sesion / errores / exitos -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+                <div class="mb-6 space-y-2">
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="rounded-xl px-4 py-3 text-sm font-medium border {% if categoria == 'error' %}bg-red-50 text-red-700 border-red-200{% elif categoria == 'success' %}bg-green-50 text-green-700 border-green-200{% else %}bg-blue-50 text-blue-700 border-blue-200{% endif %}">
+                            {{ mensaje }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block contenido %}{% endblock %}
+
+    <!-- Footer -->
+    <footer id="nosotros" class="bg-gray-900 mt-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="text-white text-2xl font-bold tracking-tight">Hambre<span class="text-brand-500">Cero</span></h3>
+                    <p class="text-gray-400 mt-2 text-sm max-w-xl">Plataforma de apoyo a comedores solidarios y campañas de seguridad alimentaria para el ODS 2.</p>
+                </div>
+                <p class="text-gray-500 text-xs">Creado con 💚 para erradicar el hambre - Universidad Cooperativa de Colombia</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

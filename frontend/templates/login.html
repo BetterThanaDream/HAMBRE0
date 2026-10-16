@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesion | Hambre Cero{% endblock %}
+
+{% block contenido %}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-md mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-2">Bienvenido de vuelta</h1>
+            <p class="text-gray-500 mb-8">Inicia sesion para apoyar las campañas del ODS 2</p>
+
+            <form method="POST" action="{{ url_for('login') }}" class="space-y-5">
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Correo electronico</label>
+                    <input type="email" id="email" name="email" required value="{{ email }}" placeholder="tu@correo.com"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 outline-none transition-all text-gray-800">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Contrasena</label>
+                    <input type="password" id="password" name="password" required placeholder="********"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 outline-none transition-all text-gray-800">
+                </div>
+                {% if error %}
+                <div class="rounded-xl px-4 py-3 text-sm font-medium bg-red-50 text-red-700 border border-red-200">{{ error }}</div>
+                {% endif %}
+                <button type="submit" class="w-full bg-brand-600 text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-brand-500 hover:scale-[1.02] transition-all duration-300">
+                    Iniciar Sesion
+                </button>
+            </form>
+
+            <p class="text-center mt-8 text-sm text-gray-500">
+                No tienes cuenta? <a href="{{ url_for('registro') }}" class="text-brand-600 font-bold hover:text-brand-700">Regístrate aquí</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

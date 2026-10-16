@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hambre Cero | Juntos por el ODS 2</title>
+    
+    <!-- Fuentes de Google: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Configurado con colores corporativos) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased bg-gray-50 text-gray-800">
+
+    <!-- Navbar con efecto Cristal (Glassmorphism) -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-white/80 border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <svg class="w-8 h-8 text-brand-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Hambre<span class="text-brand-600">Cero</span></span>
+                </div>
+                <!-- Links (Desktop) -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Iniciativas</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Transparencia</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Nosotros</a>
+                    <button class="bg-brand-600 text-white px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-500 hover:-translate-y-0.5 transition-all duration-200">
+                        Donar Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section con Imagen Impactante -->
+    <div class="relative bg-gray-900 h-[85vh] min-h-[600px] flex items-center justify-center">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Niños comiendo" class="w-full h-full object-cover opacity-40">
+        </div>
+        
+        <!-- Contenido del Hero -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-100 border border-brand-500/30 text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-sm">
+                
+            </span>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                Erradicar el hambre no es caridad, es <center>HUMANIDAD</center><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-yellow-300">es justicia.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                Únete a la mayor red de comedores solidarios. El 100% de tu aporte llega directamente a las comunidades que más lo necesitan.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-brand-500 hover:scale-105 transition-all duration-300">
+                    Hacer una Donación
+                </button>
+                <button class="bg-white/10 text-white border border-white/30 backdrop-blur-md px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300">
+                    Ver Campañas
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Estadísticas (Corregido xd) -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-gray-100 border border-gray-100">
+            <div class="text-center px-4">
+                <p class="text-4xl font-extrabold text-gray-900 mb-1">0</p>
+                <p class="text-gray-500 font-medium">Platos Servidos</p>
+            </div>
+            <div class="text-center px-4 pt-6 md:pt-0">
+                <p class="text-4xl font-extrabold text-gray-900 mb-1">0</p>
+                <p class="text-gray-500 font-medium">Comunidades Apoyadas</p>
+            </div>
+            <div class="text-center px-4 pt-6 md:pt-0">
+                <p class="text-4xl font-extrabold text-brand-600 mb-1">100%</p>
+                <p class="text-gray-500 font-medium">Transparencia Garantizada</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Campañas Activas -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Campañas de Emergencia</h2>
+                <p class="text-gray-500 mt-2">Apoya directamente a las zonas con mayor riesgo nutricional.</p>
+            </div>
+            <a href="#" class="hidden md:block text-brand-600 font-semibold hover:text-brand-700">Ver todas &rarr;</a>
+        </div>
+
+        <!-- Grid de Tarjetas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Tarjeta 1 - ACTUALIZADO: Imagen fija, Nombre Fijo, Recaudación Cero -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-300 border border-gray-100 group cursor-pointer">
+                <div class="relative h-56 overflow-hidden">
+                    <span class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md">URGENTE</span>
+                    <!-- Imagen corregida y verificada -->
+                    <img src="https://imgs.search.brave.com/USXcFr0aoyXJc2wrpi7TsAppJTk7d0v9UGSjNi-7veg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vn/UklaandSOGU1S1ZK/NFFIWmxiTWg2TUV1/ZlhQNjk3YmdHZGV4/b2JwRkczVXhvS25i/S3BPM3JoYXFlMkMx/bm5DYW5hckNRX0o3/eTdLdUpET1ZkSWJ2/MDFxMV81VEpDZUct/OGp3YW9oeXBoZW5o/eXBoZW54aWZRZWpu/eXRXR3RycjR2YlFx/Vm9tdWdaWkZCNHJ5/TDJIMUlXai9zMzIw/L2NvbWVkb3IuanBn" alt="Comedor Infantil" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">Comedor Infantil</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Garantizamos 3 comidas diarias para 150 niños en situación de pobreza extrema durante todo el año escolar.</p>
+                    
+                    <!-- Barra de progreso - A CERO -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="font-bold text-gray-900">$0 COP <span class="text-gray-500 font-normal">recaudados</span></span>
+                            <span class="text-brand-600 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-brand-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-2 text-right">Meta: $15M COP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2 - ACTUALIZADO: Recaudación Cero -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-300 border border-gray-100 group cursor-pointer">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518398046578-8cca57782e17?auto=format&fit=crop&w=800&q=80" alt="Campaña 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">Insumos Agrícolas Rurales</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Empoderamos a 40 familias campesinas con semillas y herramientas para asegurar su autosuficiencia alimentaria.</p>
+                    
+                    <!-- Barra de progreso - A CERO -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="font-bold text-gray-900">$0 COP <span class="text-gray-500 font-normal">recaudados</span></span>
+                            <span class="text-brand-600 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-brand-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-2 text-right">Meta: $10M COP</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 3 - ACTUALIZADO: Recaudación Cero -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-300 border border-gray-100 group cursor-pointer">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?auto=format&fit=crop&w=800&q=80" alt="Campaña 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">Rescate de Alimentos</h3>
+                    <p class="text-gray-600 text-sm mb-6 line-clamp-2">Logística y transporte para recuperar toneladas de alimentos en buen estado antes de que sean desechados en la central de abastos.</p>
+                    
+                    <!-- Barra de progreso - A CERO -->
+                    <div class="mb-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="font-bold text-gray-900">$0 COP <span class="text-gray-500 font-normal">recaudados</span></span>
+                            <span class="text-brand-600 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-100 rounded-full h-2.5">
+                            <div class="bg-brand-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-2 text-right">Meta: $8M COP</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

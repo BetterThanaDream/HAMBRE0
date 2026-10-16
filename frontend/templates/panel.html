@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Panel Principal | Hambre Cero{% endblock %}
+
+{% block contenido %}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Encabezado del panel -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Panel Principal</h1>
+            <p class="text-gray-500 mt-2">Hola {{ usuario.nombre_completo }}, gestiona tus aportes al ODS 2.</p>
+        </div>
+        <button onclick="window.location.href='{{ url_for('donacion') }}'" class="bg-brand-600 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-brand-500 transition-all duration-300">
+            Hacer una Donación
+        </button>
+    </div>
+
+    <!-- Tarjetas de resumen -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <p class="text-3xl font-extrabold text-brand-600 mb-1">{{ mis_donaciones|length }}</p>
+            <p class="text-gray-500 font-medium text-sm">Donaciones realizadas</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <p class="text-3xl font-extrabold text-gray-900 mb-1">${{ '{:,.0f}'.format(mis_donaciones|sum(attribute='monto')|float) }}</p>
+            <p class="text-gray-500 font-medium text-sm">Total aportado</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <p class="text-3xl font-extrabold text-gray-900 mb-1">{{ campanas_activas|length }}</p>
+            <p class="text-gray-500 font-medium text-sm">Campañas activas</p>
+        </div>
+    </div>
+
+    <!-- Mis donaciones -->
+    <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-8 mb-10">
+        <h2 class="text-2xl font-bold text-gray-900 tracking-tight mb-6">Mis Donaciones</h2>
+        {% if mis_donaciones %}
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead>
+                    <tr class="text-left text-gray-500 uppercase tracking-wider text-xs border-b border-gray-100">
+                        <th class="py-3 pr-4">Campaña</th>
+                        <th class="py-3 pr-4">Monto</th>
+                        <th class="py-3 pr-4">Estado</th>
+                        <th class="py-3 pr-4">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in mis_donaciones %}
+                    <tr class="border-b border-gray-50">
+                        <td class="py-3 pr-4 font-medium text-gray-900">{{ d.campania }}</td>
+                        <td class="py-3 pr-4 text-gray-700">${{ '{:,.0f}'.format(d.monto|float) }} COP</td>
+                        <td class="py-3 pr-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {% if d.estado_pago == 'aprobado' %}bg-green-100 text-green-700{% elif d.estado_pago == 'rechazado' %}bg-red-100 text-red-700{% else %}bg-yellow-100 text-yellow-700{% endif %}">
+                                {{ d.estado_pago }}
+                            </span>
+                        </td>
+                        <td class="py-3 pr-4 text-gray-500">{{ d.fecha_donacion[:10] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-gray-500">Aun no has realizado donaciones. Apoya una de las campañas activas del ODS 2.</p>
+        <button onclick="window.location.href='{{ url_for('index') }}'" class="mt-4 inline-block bg-brand-600 text-white px-6 py-3 rounded-full font-bold">Ver Campañas</button>
+        {% endif %}
+    </div>
+
+    <!-- Campañas para donar -->
+    <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
+        <h2 class="text-2xl font-bold text-gray-900 tracking-tight mb-6">Campañas que puedes apoyar</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for campana in campanas_activas %}
+            <div class="border border-gray-100 rounded-2xl p-5">
+                <h3 class="font-bold text-gray-900 mb-2">{{ campana.titulo }}</h3>
+                <p class="text-gray-600 text-sm mb-4">{{ campana.descripcion|truncate(100) }}</p>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="font-bold text-gray-900">${{ '{:,.0f}'.format(campana.monto_recaudado|float) }} COP</span>
+                    <span class="text-brand-600 font-bold">{{ campana.pct }}%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-2.5 mb-4">
+                    <div class="bg-brand-500 h-2.5 rounded-full" style="width: {{ campana.pct }}%"></div>
+                </div>
+                <button onclick="window.location.href='{{ url_for('donacion') }}'" class="w-full bg-brand-600 text-white py-3 rounded-full font-bold hover:bg-brand-500 transition-all duration-300">
+                    Donar
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
